@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'navbar.html' %}
+
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}
+
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-2">
+            <img src="{% static 'image/robot-1.png' %}" alt="robot" class="d-none d-md-block" style="max-width: 200px;">
+        </div>
+        <div class="col-md-8 d-flex justify-content-center">
+            <div class="card p-4"
+                style="width: 100%; background-color: rgba(255, 255, 255, 0.13); backdrop-filter: blur(10px); border: 2px solid rgba(255, 255, 255, 0.1); box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);">
+                <h1 style="color: #caf0f8;">How to place your order: </h1>
+                <p style="color: #90e0ef;">
+                    Choose your desired cubes from the options below to include in your order (maximum of 4 different
+                    cubes ).
+                    <br> Once you've made your selections, click the 'Place Order' button to proceed.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <img src="{% static 'image/robot-2.png' %}" alt="robot" class="float-right d-none d-md-block"
+                style="max-width: 200px;">
+        </div>
+    </div>
+    <form action="" method="post" class="mt-5">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-3 col-6 d-flex justify-content-center" style="padding-bottom: 10px;">
+                <div class="rounded p-4"
+                    style="width: 100%; background-color: rgba(255, 255, 255, 0.13); backdrop-filter: blur(10px); border: 2px solid rgba(255, 255, 255, 0.1); box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);">
+                    <div class="product-option text-center">
+                        <img src="{% static 'image/red.png' %}" alt="Red Cube" style="max-width: 100px;">
+                    </div>
+
+                    <div class="product-option text-center" style="margin-top: 10px;">
+                        <input type="number" name="red" min="0" max="4" placeholder="Quantity" style="width: 50%;">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-3 col-6 d-flex justify-content-center" style="padding-bottom: 10px;">
+                <div class="rounded p-4"
+                    style="width: 100%; background-color: rgba(255, 255, 255, 0.13); backdrop-filter: blur(10px); border: 2px solid rgba(255, 255, 255, 0.1); box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);">
+                    <div class="product-option text-center">
+                        <img src="{% static 'image/green.png' %}" alt="Green Cube" style="max-width: 100px;">
+                    </div>
+
+                    <div class="product-option text-center" style="margin-top: 10px;">
+                        <input type="number" name="green" min="0" max="4" placeholder="Quantity" style="width: 50%;">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-3 col-6 d-flex justify-content-center" style="padding-bottom: 10px;">
+                <div class="rounded p-4"
+                    style="width: 100%; background-color: rgba(255, 255, 255, 0.13); backdrop-filter: blur(10px); border: 2px solid rgba(255, 255, 255, 0.1); box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);">
+                    <div class="product-option text-center">
+                        <img src="{% static 'image/blue.png' %}" alt="Blue Cube" style="max-width: 100px;">
+                    </div>
+
+                    <div class="product-option text-center" style="margin-top: 10px;">
+                        <input type="number" name="blue" min="0" max="4" placeholder="Quantity" style="width: 50%;">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-3 col-6 d-flex justify-content-center" style="padding-bottom: 10px;">
+                <div class="rounded p-4"
+                    style="width: 100%; background-color: rgba(255, 255, 255, 0.13); backdrop-filter: blur(10px); border: 2px solid rgba(255, 255, 255, 0.1); box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);">
+                    <div class="product-option text-center">
+                        <img src="{% static 'image/yellow.png' %}" alt="Yellow Cube" style="max-width: 100px;">
+                    </div>
+
+                    <div class="product-option text-center" style="margin-top: 10px;">
+                        <input type="number" name="yellow" min="0" max="4" placeholder="Quantity" style="width: 50%;">
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="container" style="padding-bottom: 25px;">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <button type="submit" class="btn btn-primary" id="placeOrderButton"
+                        style="background-color: #ffffff; color: #080710;" disabled>Place Order</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const inputFields = document.querySelectorAll("input[type='number']");
+        const placeOrderButton = document.getElementById('placeOrderButton');
+
+        function updateOrderButtonState() {
+            const selectedCubes = Array.from(inputFields).reduce((total, input) => total + Number(input.value), 0);
+            placeOrderButton.disabled = selectedCubes === 0 || selectedCubes > 4;
+        }
+
+        inputFields.forEach(function (input) {
+            input.addEventListener("input", function () {
+                updateOrderButtonState();
+            });
+        });
+
+        // Initial check to ensure the button is in the correct state
+        updateOrderButtonState();
+    });
+</script>
+
+{% endblock content %}

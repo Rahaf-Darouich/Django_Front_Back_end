@@ -1,0 +1,38 @@
+<!-- NAVBAR STARTING -->
+<header>
+  <nav class=" navbar navbar-expand-lg navbar-light bg-light  py-lg-0 ">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home' %}">
+        <i class="fas fa-robot" style="color: #336BA0; font-size: 50px;"></i>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+
+          <li class="nav-item {% if request.path == '/login/' %}active{% endif %}">
+            <a class="nav-link" href="{% url 'home' %}">
+              <i class="fas fa-home" style="color: #336BA0"> HOME </i>
+            </a>
+          </li>
+
+          <li class="nav-item {% if request.path == '/login/' %}active{% endif %}">
+            <a class="nav-link" href="{% url 'about' %}">
+              <i class="fas fa-info-circle" style="color: #336BA0"> ABOUT </i>
+            </a>
+          </li>
+
+          <li class="nav-item {% if request.path == '/login/' %}active{% endif %}">
+            <a class="nav-link" href="{% url 'logout' %}">
+              <i class="fas fa-sign-out-alt" style="color: #336BA0"> Logout </i>
+            </a>
+          </li>            
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+</header>

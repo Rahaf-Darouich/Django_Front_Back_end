@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <form action="" method="post" class="rounded p-4" style="background-color: rgba(255, 255, 255, 0.13); backdrop-filter: blur(10px); border: 2px solid rgba(255, 255, 255, 0.1); box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);">
+            {% csrf_token %}
+                <h1 class="text-center" style="color: #caf0f8;">Sign In</h1>
+
+                <div class="form-group">
+                    <label for="username" style="color: #90e0ef;">Username</label>
+                    <input type="text" placeholder="Username" name="username" id="username" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="password" style="color: #90e0ef;">Password</label>
+                <input type="password" placeholder="Password" id="password" name="password" class="form-control">
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary btn-block" style="margin-top: 50px; width: 100%; background-color: #ffffff; color: #080710;">Sign in</button>
+                </div>
+
+                <p class="text-center mt-3" style="color: #90e0ef;">Not a member? <a href="{% url 'signup' %}" class="btn btn-link" style="color: #90e0ef;">Sign Up</a></p>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

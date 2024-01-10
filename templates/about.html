@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'navbar.html' %}
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="row">
+        <div class="col-md-9 col-12 d-flex justify-content-center">
+            <div class="card p-4"
+                style="width: 100%; background-color: rgba(255, 255, 255, 0.13); backdrop-filter: blur(10px); border: 2px solid rgba(255, 255, 255, 0.1); box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);">
+                <h1 style="color: #caf0f8;">About the project:</h1>
+                <p style="color: #90e0ef;">
+                    The project was created by David, Rahaf, Fabian, and Akram. The prototype automates the process of
+                    sorting and storing
+                    items by color, using various technological components including a robot arm, PLC, Raspberry Pi with
+                    a camera, conveyor
+                    belt, cloud services, a database, and a web platform. The camera identifies object colors and
+                    positions, and the
+                    conveyor moves objects to the robot arm for sorting and storage. Users can place orders for separate
+                    sets of boxes via a
+                    web application, and there's also a purpose-built computer application at the robot's station for
+                    manual control,
+                    allowing users to start and stop the process.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-2 d-flex justify-content-center">
+            <img src="{% static 'image/robot-2.png' %}" alt="robot" style="max-width: 400px;" class="float-right float-right d-none d-md-block">
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
